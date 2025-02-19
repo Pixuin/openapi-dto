@@ -2,6 +2,36 @@
 
 OpenAPI DTO Generator je konzolový nástroj v PHP 8.3, který načte OpenAPI specifikaci (soubor `openapi.json`) a na základě definic ve schématech vygeneruje immutable DTO třídy pro requesty i response. Generované třídy jsou navrženy dle SOLID principů a přístup k interním hodnotám je zajištěn výhradně prostřednictvím veřejných getter metod, což umožňuje jejich následnou customizaci potomky.
 
+## Struktura projektu
+
+```mermaid
+graph TD;
+    A[openapi-dto-generator] --> B[bin];
+    A --> C[src];
+    A --> D[templates];
+    A --> E[tests];
+    A --> F[config];
+    A --> G[vendor];
+    C --> C1[Parser];
+    C --> C2[Generator];
+    C --> C3[Writer];
+    C --> C4[DTO];
+    C1 --> C1A[OpenAPIParser.php];
+    C2 --> C2A[CodeGenerator.php];
+    C3 --> C3A[CodeWriter.php];
+    C4 --> C4A[BaseDTO.php];
+    D --> D1[dto.mustache];
+    E --> E1[Parser];
+    E --> E2[Generator];
+    E --> E3[Writer];
+    E1 --> E1A[OpenAPIParserTest.php];
+    E2 --> E2A[CodeGeneratorTest.php];
+    E3 --> E3A[CodeWriterTest.php];
+    F --> F1[generator.php];
+```
+
+Podrobnější dokumentaci naleznete v souboru [ZADANI.md](ZADANI.md).
+
 ## Požadavky
 
 - PHP 8.3 nebo novější
