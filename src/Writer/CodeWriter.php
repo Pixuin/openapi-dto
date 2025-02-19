@@ -4,6 +4,9 @@ namespace Pixuin\OpenapiDTO\Writer;
 
 class CodeWriter
 {
+    /**
+     * @param array<string, string> $classes
+     */
     public function write(array $classes, string $outputDir): void
     {
         if (!is_dir($outputDir) && !mkdir($outputDir, 0777, true) && !is_dir($outputDir)) {

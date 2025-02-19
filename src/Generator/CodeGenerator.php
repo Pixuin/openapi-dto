@@ -7,8 +7,8 @@ use Mustache_Engine;
 
 class CodeGenerator
 {
-    private $parser;
-    private $mustache;
+    private OpenAPIParser $parser;
+    private Mustache_Engine $mustache;
 
     public function __construct(OpenAPIParser $parser)
     {
@@ -16,6 +16,9 @@ class CodeGenerator
         $this->mustache = new Mustache_Engine();
     }
 
+    /**
+     * @return array<string, string>
+     */
     public function generate(string $templatePath): array
     {
         $schemas = $this->parser->getSchemas();
@@ -35,6 +38,10 @@ class CodeGenerator
         return $generatedClasses;
     }
 
+    /**
+     * @param array<string, mixed> $schema
+     * @return array<int, array<string, string>>
+     */
     private function extractProperties(array $schema): array
     {
         $properties = [];
