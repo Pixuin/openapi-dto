@@ -1,2 +1,49 @@
 #!/bin/bash
-# Placeholder for the CLI tool script
+
+# Check if the correct number of arguments is provided
+if [ "$#" -ne 3 ]; then
+    echo "Usage: $0 --input=<input_file> --output=<output_dir> --namespace=<namespace>"
+    exit 1
+fi
+
+# Parse arguments
+for i in "$@"; do
+  case $i in
+    --input=*)
+      INPUT_FILE="${i#*=}"
+      shift
+      ;;
+    --output=*)
+      OUTPUT_DIR="${i#*=}"
+      shift
+      ;;
+    --namespace=*)
+      NAMESPACE="${i#*=}"
+      shift
+      ;;
+    *)
+      echo "Unknown option: $i"
+      exit 1
+      ;;
+  esac
+done
+
+# Run the PHP script
+php -r "
+require 'vendor/autoload.php';
+
+use App\Parser\OpenAPIParser;
+use App\Generator\CodeGenerator;
+use App\Writer\CodeWriter;
+
+\$parser = new OpenAPIParser();
+\$parser->parse('$INPUT_FILE');
+
+\$generator = new CodeGenerator(\$parser);
+\$classes = \$generator->generate('templates/dto.mustache');
+
+\$writer = new CodeWriter();
+\$writer->write(\$classes, '$OUTPUT_DIR');
+
+echo 'DTO classes generated successfully in $OUTPUT_DIR';
+"
