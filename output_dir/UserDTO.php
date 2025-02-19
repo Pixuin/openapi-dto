@@ -5,6 +5,7 @@ namespace Pixuin\OpenapiDTO\DTO;
 use Symfony\Component\HttpFoundation\Request;
 
 class UserDTO implements \JsonSerializable
+{
 ````
 
 templates/dto.mustache
@@ -40,7 +41,7 @@ templates/dto.mustache
     {
         return new self(
             /** @phpstan-ignore-next-line */
-            $request->get('id'), $request->get('name'), $request->get('email'), 
+            $request->get('id'), $request->get('name'), $request->get('email')
         );
     }
 }
