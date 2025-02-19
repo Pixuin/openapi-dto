@@ -29,7 +29,9 @@ for i in "$@"; do
 done
 
 # Run the PHP script
-php -r "
+php <<'PHP_SCRIPT'
+<?php
+
 require 'vendor/autoload.php';
 
 use App\Parser\OpenAPIParser;
@@ -46,4 +48,5 @@ use App\Writer\CodeWriter;
 \$writer->write(\$classes, '$OUTPUT_DIR');
 
 echo 'DTO classes generated successfully in $OUTPUT_DIR';
-"
+
+PHP_SCRIPT
