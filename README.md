@@ -6,6 +6,15 @@ OpenAPI DTO Generator is a PHP 8.3 command-line tool that reads an OpenAPI speci
 
 Vladimir Polak <vladimir.polak.ml@gmail.com>
 
+## Project Goals
+
+- **Immutable DTO Classes**: Generate immutable Data Transfer Object classes from OpenAPI specifications.
+- **SOLID Principles**: Ensure that the generated code adheres to SOLID principles for better maintainability and extensibility.
+- **Dynamic Namespace**: Allow users to specify a namespace for the generated classes via command line arguments.
+- **Factory Methods**: Include factory methods for creating instances from HTTP requests.
+- **Modular Design**: Structure the project into clear modules (Parser, Code Generator, Writer, Tests) with well-defined responsibilities.
+- **Unit Testing**: Implement unit tests using Pest to verify the functionality of the generator, parser, and writer.
+
 ## Project Structure
 
 ```mermaid
