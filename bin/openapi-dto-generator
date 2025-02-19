@@ -1,35 +1,4 @@
-#!/bin/bash
-
-# Check if the correct number of arguments is provided
-if [ "$#" -ne 3 ]; then
-    echo "Usage: $0 --input=<input_file> --output=<output_dir> --namespace=<namespace>"
-    exit 1
-fi
-
-# Parse arguments
-for i in "$@"; do
-  case $i in
-    --input=*)
-      INPUT_FILE="${i#*=}"
-      shift
-      ;;
-    --output=*)
-      OUTPUT_DIR="${i#*=}"
-      shift
-      ;;
-    --namespace=*)
-      NAMESPACE="${i#*=}"
-      shift
-      ;;
-    *)
-      echo "Unknown option: $i"
-      exit 1
-      ;;
-  esac
-done
-
-# Run the PHP script
-php <<PHP_SCRIPT
+#!/usr/bin/env php
 <?php
 
 require 'vendor/autoload.php';
@@ -38,15 +7,41 @@ use App\Parser\OpenAPIParser;
 use App\Generator\CodeGenerator;
 use App\Writer\CodeWriter;
 
-$parser = new OpenAPIParser();
-$parser->parse('$INPUT_FILE');
+// Function to parse command-line arguments
+function parseArguments($argv) {
+    $args = [];
+    foreach ($argv as $arg) {
+        if (preg_match('/--(\w+)=/', $arg, $matches)) {
+            $key = $matches[1];
+            $value = preg_replace('/--\w+=/', '', $arg);
+            $args[$key] = $value;
+        }
+    }
+    return $args;
+}
 
+// Get command-line arguments
+$args = parseArguments($argv);
+
+if (!isset($args['input']) || !isset($args['output']) || !isset($args['namespace'])) {
+    echo "Usage: php bin/openapi-dto-generator --input=<input_file> --output=<output_dir> --namespace=<namespace>\n";
+    exit(1);
+}
+
+$inputFile = $args['input'];
+$outputDir = $args['output'];
+$namespace = $args['namespace'];
+
+// Parse the OpenAPI file
+$parser = new OpenAPIParser();
+$parser->parse($inputFile);
+
+// Generate DTO classes
 $generator = new CodeGenerator($parser);
 $classes = $generator->generate('templates/dto.mustache');
 
+// Write the generated classes to the output directory
 $writer = new CodeWriter();
-$writer->write($classes, '$OUTPUT_DIR');
+$writer->write($classes, $outputDir);
 
-echo 'DTO classes generated successfully in $OUTPUT_DIR';
-
-PHP_SCRIPT
+echo "DTO classes generated successfully in $outputDir\n";
