@@ -8,7 +8,8 @@ use Pixuin\OpenapiDTO\Generator\CodeGenerator;
 use Pixuin\OpenapiDTO\Writer\CodeWriter;
 
 // Function to parse command-line arguments
-function parseArguments($argv) {
+function parseArguments($argv): array
+{
     $args = [];
     foreach ($argv as $arg) {
         if (preg_match('/--(\w+)=/', $arg, $matches)) {

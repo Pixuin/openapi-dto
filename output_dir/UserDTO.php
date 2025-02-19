@@ -4,7 +4,13 @@ namespace Pixuin\OpenapiDTO\DTO;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class UserDTO
+class UserDTO implements \JsonSerializable
+````
+
+templates/dto.mustache
+````mustache
+<<<<<<< SEARCH
+    }
 {
     private readonly int $id;
     private readonly string $name;
@@ -17,15 +23,15 @@ class UserDTO
         $this->email = $email;
     }
 
-    public function get(): int
+    public function getId(): int
     {
         return $this->id;
     }
-    public function get(): string
+    public function getName(): string
     {
         return $this->name;
     }
-    public function get(): string
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -33,6 +39,7 @@ class UserDTO
     public static function fromRequest(Request $request): self
     {
         return new self(
+            /** @phpstan-ignore-next-line */
             $request->get('id'), $request->get('name'), $request->get('email'), 
         );
     }
