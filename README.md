@@ -98,7 +98,7 @@ Projekt je modulární a snadno rozšiřitelný:
 - Šablony: Kód se generuje pomocí Mustache šablon. Pro úpravu vygenerovaného kódu upravte šablony v adresáři `templates/`.
 - Konfigurace: Soubor `config/generator.php` umožňuje nastavit vlastní pravidla (např. mapování typů, prefixy/suffixy tříd apod.).
 
-## Architektura a SOLID principy
+## Architektura
 
 Projekt je rozdělen do následujících modulů:
 - Parser: Načítá a zpracovává OpenAPI specifikaci.
