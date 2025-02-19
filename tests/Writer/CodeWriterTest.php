@@ -20,3 +20,9 @@ it('creates directory and files when writing classes', function () {
     array_map('unlink', glob("$this->outputDir/*.*"));
     rmdir($this->outputDir);
 });
+
+it('throws an exception if the directory cannot be created', function () {
+    $invalidOutputDir = '/invalid/directory/path';
+    $this->expectException(\RuntimeException::class);
+    $this->writer->write($this->classes, $invalidOutputDir);
+});
