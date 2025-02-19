@@ -1,6 +1,10 @@
 # OpenAPI DTO Generator
 
-![Coverage](https://img.shields.io/badge/coverage-93.02%25-brightgreen)
+![Build Status](https://img.shields.io/github/workflow/status/Pixuin/openapi-dto/CI)
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+![PHP Version](https://img.shields.io/badge/php-8.3%2B-blue)
+![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-brightgreen)
+![Pest](https://img.shields.io/badge/tests-passed-brightgreen)
 
 OpenAPI DTO Generator is a PHP 8.3 command-line tool that reads an OpenAPI specification (the `openapi.json` file) and generates immutable Data Transfer Object (DTO) classes based on the definitions in the schemas. The generated classes are designed according to SOLID principles, and access to internal values is provided exclusively through public getter methods, allowing for customization by subclasses.
 
@@ -35,8 +39,8 @@ For detailed documentation, please refer to the [ZADANI.md](ZADANI.md).
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/openapi-dto-generator.git
-   cd openapi-dto-generator
+   git clone https://github.com/Pixuin/openapi-dto.git
+   cd openapi-dto
    ```
 
 2. Install dependencies using Composer:
@@ -116,7 +120,7 @@ If you have ideas for improvements or find bugs, please create an issue or pull 
 
 ## License
 
-This project is licensed under the [MIT License](https://mit-license.org/).
+This project is licensed under the [MIT License](LICENSE).
 
 ## Author
 
