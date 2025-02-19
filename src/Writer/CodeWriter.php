@@ -3,6 +3,7 @@
 namespace Pixuin\OpenapiDTO\Writer;
 
 use RuntimeException;
+use Whoops\Exception\ErrorException;
 
 class CodeWriter
 {
@@ -11,8 +12,10 @@ class CodeWriter
      */
     public function write(array $classes, string $outputDir): void
     {
-        if (!is_dir($outputDir) && !mkdir($outputDir, 0777, true) && !is_dir($outputDir)) {
-            throw new RuntimeException(sprintf('Directory "%s" was not created', $outputDir));
+        if (!is_dir($outputDir)) {
+            if (!@mkdir($outputDir, 0777, true)) {
+                throw new RuntimeException(sprintf('Directory "%s" was not created', $outputDir));
+            }
         }
 
         foreach ($classes as $className => $classCode) {
