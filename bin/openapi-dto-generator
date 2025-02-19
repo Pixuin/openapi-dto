@@ -38,14 +38,14 @@ use App\Parser\OpenAPIParser;
 use App\Generator\CodeGenerator;
 use App\Writer\CodeWriter;
 
-\$parser = new OpenAPIParser();
-\$parser->parse('$INPUT_FILE');
+$parser = new OpenAPIParser();
+$parser->parse('$INPUT_FILE');
 
-\$generator = new CodeGenerator(\$parser);
-\$classes = \$generator->generate('templates/dto.mustache');
+$generator = new CodeGenerator($parser);
+$classes = $generator->generate('templates/dto.mustache');
 
-\$writer = new CodeWriter();
-\$writer->write(\$classes, '$OUTPUT_DIR');
+$writer = new CodeWriter();
+$writer->write($classes, '$OUTPUT_DIR');
 
 echo 'DTO classes generated successfully in $OUTPUT_DIR';
 
