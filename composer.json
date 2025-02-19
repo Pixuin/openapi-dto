@@ -1,5 +1,4 @@
 {
-}{
     "name": "vas-projekt/openapi-dto-generator",
     "description": "A CLI tool to generate immutable DTO classes from OpenAPI specifications.",
     "type": "project",
@@ -19,5 +18,10 @@
     },
     "scripts": {
         "test": "pest"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     }
 }
