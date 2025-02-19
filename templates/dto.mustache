@@ -1,1 +1,33 @@
-{{!-- Placeholder for Mustache template --}}
+<?php
+
+namespace App\DTO;
+
+use Symfony\Component\HttpFoundation\Request;
+
+class {{className}}
+{
+    {{#properties}}
+    private readonly {{type}} ${{name}};
+    {{/properties}}
+
+    public function __construct({{#properties}}{{type}} ${{name}}, {{/properties}})
+    {
+        {{#properties}}
+        $this->{{name}} = ${{name}};
+        {{/properties}}
+    }
+
+    {{#properties}}
+    public function get{{name|capitalize}}(): {{type}}
+    {
+        return $this->{{name}};
+    }
+    {{/properties}}
+
+    public static function fromRequest(Request $request): self
+    {
+        return new self(
+            {{#properties}}$request->get('{{name}}'), {{/properties}}
+        );
+    }
+}
