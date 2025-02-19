@@ -26,8 +26,6 @@ OpenAPI DTO Generator is a PHP 8.3 command-line tool that reads an OpenAPI speci
 - **config/**: Contains configuration files for the generator.
 - **vendor/**: Contains third-party dependencies managed by Composer.
 
-For detailed documentation, please refer to the [ZADANI.md](ZADANI.md).
-
 ## Requirements
 
 - PHP 8.3 or newer
