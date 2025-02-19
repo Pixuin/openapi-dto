@@ -5,7 +5,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "symfony/http-foundation": "^6.0",
+        "symfony/http-foundation": "~2.8|^3.0",
         "mustache/mustache": "^2.14",
         "pestphp/pest": "^1.22"
     },
