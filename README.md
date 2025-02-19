@@ -1,8 +1,8 @@
 # OpenAPI DTO Generator
 
-OpenAPI DTO Generator je konzolový nástroj v PHP 8.3, který načte OpenAPI specifikaci (soubor `openapi.json`) a na základě definic ve schématech vygeneruje immutable DTO třídy pro requesty i response. Generované třídy jsou navrženy dle SOLID principů a přístup k interním hodnotám je zajištěn výhradně prostřednictvím veřejných getter metod, což umožňuje jejich následnou customizaci potomky.
+OpenAPI DTO Generator is a PHP 8.3 command-line tool that reads an OpenAPI specification (the `openapi.json` file) and generates immutable Data Transfer Object (DTO) classes based on the definitions in the schemas. The generated classes are designed according to SOLID principles, and access to internal values is provided exclusively through public getter methods, allowing for customization by subclasses.
 
-## Struktura projektu
+## Project Structure
 
 ```mermaid
 graph TD;
@@ -30,88 +30,98 @@ graph TD;
     F --> F1[generator.php];
 ```
 
-Podrobnější dokumentaci naleznete v souboru [ZADANI.md](ZADANI.md).
+For detailed documentation, please refer to the [ZADANI.md](ZADANI.md).
 
-## Požadavky
+## Requirements
 
-- PHP 8.3 nebo novější
+- PHP 8.3 or newer
 - Composer
-- (Volitelně) Symfony HttpFoundation (pro práci s HTTP requesty)
-- Pest (pro jednotkové testy)
+- (Optional) Symfony HttpFoundation (for handling HTTP requests)
+- Pest (for unit testing)
 
-## Instalace
+## Installation
 
-1. Naklonujte repozitář:
-   git clone https://github.com/vas-projekt/openapi-dto-generator.git
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/openapi-dto-generator.git
    cd openapi-dto-generator
+   ```
 
-2. Nainstalujte závislosti pomocí Composeru:
+2. Install dependencies using Composer:
+   ```bash
    composer install
+   ```
 
-## Použití
+## Usage
 
-### Spuštění generátoru
+### Running the Generator
 
-Spusťte generátor z příkazové řádky:
-php bin/openapi-dto-generator --input=/cesta/k/openapi.json --output=/cesta/k/vygenerovanym/tridam --namespace="App\DTO"
+Run the generator from the command line:
+```bash
+php bin/openapi-dto-generator --input=/path/to/openapi.json --output=/path/to/generated/classes --namespace="App\DTO"
+```
 
-**Parametry:**
+**Parameters:**
 
-- --input – cesta k souboru `openapi.json` (může být také URL)
-- --output – adresář, kam se vygenerují DTO třídy
-- --namespace – kořenový namespace pro generované třídy
+- `--input` – path to the `openapi.json` file (can also be a URL)
+- `--output` – directory where the DTO classes will be generated
+- `--namespace` – root namespace for the generated classes
 
-### Generované DTO třídy
+### Generated DTO Classes
 
-Každá vygenerovaná třída:
-- Má private readonly vlastnosti, které jsou inicializovány pouze v konstruktoru.
-- Neposkytuje veřejné setter metody – přístup k interním hodnotám je realizován výhradně přes veřejné getter metody (např. getName(), getId() apod.). Díky tomu mohou potomci tyto metody přepsat a upravit chování podle potřeb.
-- Obsahuje statickou tovární metodu fromRequest(Request $request): self, která vytvoří instanci z HTTP requestu.
+Each generated class:
+- Has private readonly properties that are initialized only in the constructor.
+- Does not provide public setter methods – access to internal values is provided exclusively through public getter methods (e.g., `getName()`, `getId()`). This allows subclasses to override these methods for custom behavior.
+- Contains a static factory method `fromRequest(Request $request): self`, which creates an instance from an HTTP request.
 
-### Příklad použití generovaného DTO
+### Example of Using Generated DTO
 
+```php
 use App\DTO\UserRequestDTO;
 use Symfony\Component\HttpFoundation\Request;
 
-// Vytvoření HTTP requestu (např. pomocí Symfony HttpFoundation)
+// Create an HTTP request (e.g., using Symfony HttpFoundation)
 $request = Request::createFromGlobals();
 
-// Vytvoření DTO pomocí tovární metody
+// Create DTO using the factory method
 $userDto = UserRequestDTO::fromRequest($request);
 
-// Přístup k hodnotám přes gettery
+// Access values through getters
 echo $userDto->getName();
+```
 
-### Spuštění testů
+### Running Tests
 
-Testy jsou psány pomocí Pest (https://pestphp.com/) frameworku. Spuštění testů provedete příkazem:
+Tests are written using the Pest framework (https://pestphp.com/). To run the tests, use the following command:
+```bash
 vendor/bin/pest
+```
 
-Testy ověřují:
-- Správné načtení a parsování OpenAPI specifikace.
-- Generování DTO tříd se správnými vlastnostmi a getter metodami.
-- Immutabilitu generovaných objektů.
+Tests verify:
+- Correct loading and parsing of the OpenAPI specification.
+- Generation of DTO classes with the correct properties and getter methods.
+- Immutability of generated objects.
 
-## Rozšíření a přizpůsobení
+## Extending and Customizing
 
-Projekt je modulární a snadno rozšiřitelný:
-- Šablony: Kód se generuje pomocí Mustache šablon. Pro úpravu vygenerovaného kódu upravte šablony v adresáři `templates/`.
-- Konfigurace: Soubor `config/generator.php` umožňuje nastavit vlastní pravidla (např. mapování typů, prefixy/suffixy tříd apod.).
+The project is modular and easily extendable:
+- **Templates**: Code is generated using Mustache templates. To modify the generated code, edit the templates in the `templates/` directory.
+- **Configuration**: The `config/generator.php` file allows you to set custom rules (e.g., type mappings, class prefixes/suffixes).
 
-## Architektura
+## Architecture
 
-Projekt je rozdělen do následujících modulů:
-- Parser: Načítá a zpracovává OpenAPI specifikaci.
-- Generátor kódu: Převádí interní datové struktury na PHP třídy pomocí šablon.
-- Writer: Zapisuje generovaný kód do souborového systému.
-- Tests: Jednotkové testy (Pest) ověřující klíčovou funkčnost.
+The project is divided into the following modules:
+- **Parser**: Loads and processes the OpenAPI specification.
+- **Code Generator**: Converts internal data structures into PHP classes using templates.
+- **Writer**: Writes the generated code to the file system.
+- **Tests**: Unit tests (Pest) verifying key functionality.
 
-Celkově je cílem robustní a udržovatelné řešení s jasně oddělenými odpovědnostmi, které podporuje customizaci (přes přepsání getter metod) a umožňuje snadnou integraci do libovolných projektů.
+Overall, the goal is to provide a robust and maintainable solution with clearly separated responsibilities that supports customization (through overridden getter methods) and allows easy integration into any project.
 
-## Přispění
+## Contributing
 
-Máte-li nápady na zlepšení nebo objevíte chyby, vytvořte prosím issue nebo pull request v repozitáři.
+If you have ideas for improvements or find bugs, please create an issue or pull request in the repository.
 
-## Licence
+## License
 
-Tento projekt je licencován pod [MIT licencí](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
