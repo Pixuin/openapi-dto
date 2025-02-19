@@ -1,7 +1,8 @@
 {
-    "name": "vas-projekt/openapi-dto-generator",
+    "name": "pixuin/openapi-dto-generator",
     "description": "A CLI tool to generate immutable DTO classes from OpenAPI specifications.",
     "type": "project",
+    "license": "MIT",
     "require": {
         "php": "^8.3",
         "symfony/http-foundation": "^6.0",
