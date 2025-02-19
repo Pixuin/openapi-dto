@@ -27,6 +27,7 @@ class {{className}}
     public static function fromRequest(Request $request): self
     {
         return new self(
+            /** @phpstan-ignore-next-line */
             {{#properties}}$request->get('{{name}}'), {{/properties}}
         );
     }
