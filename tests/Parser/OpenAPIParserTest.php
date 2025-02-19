@@ -2,7 +2,6 @@
 
 namespace Pixuin\OpenapiDTO\Parser;
 
-use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
 it('parses valid OpenAPI JSON and retrieves schemas', function () {
@@ -21,6 +20,5 @@ it('parses valid OpenAPI JSON and retrieves schemas', function () {
 
 it('throws an exception for invalid JSON', function () {
     $parser = new OpenAPIParser();
-    $this->expectException(RuntimeException::class);
-    $parser->parse(__DIR__ . '/../invalid_openapi.json');
+    expect(fn() => $parser->parse(__DIR__ . '/../invalid_openapi.json'))->toThrow(RuntimeException::class);
 });
