@@ -2,25 +2,21 @@
 
 namespace Pixuin\OpenapiDTO\Writer;
 
-use PHPUnit\Framework\TestCase;
+beforeEach(function () {
+    $this->outputDir = __DIR__ . '/../../output_test';
+    $this->classes = [
+        'UserDTODTO' => '<?php declare(strict_types=1); namespace DTO; class UserDTODTO { private int $id; private string $name; private string $email; }',
+    ];
+    $this->writer = new CodeWriter();
+});
 
-class CodeWriterTest extends TestCase
-{
-    public function testWriteCreatesDirectoryAndFiles(): void
-    {
-        $outputDir = __DIR__ . '/../../output_test';
-        $classes = [
-            'UserDTODTO' => '<?php declare(strict_types=1); namespace DTO; class UserDTODTO { private int $id; private string $name; private string $email; }',
-        ];
+it('creates directory and files when writing classes', function () {
+    $this->writer->write($this->classes, $this->outputDir);
 
-        $writer = new CodeWriter();
-        $writer->write($classes, $outputDir);
+    expect(is_dir($this->outputDir))->toBeTrue();
+    expect(file_exists($this->outputDir . '/UserDTODTO.php'))->toBeTrue();
 
-        $this->assertDirectoryExists($outputDir);
-        $this->assertFileExists($outputDir . '/UserDTODTO.php');
-
-        // Clean up
-        array_map('unlink', glob("$outputDir/*.*"));
-        rmdir($outputDir);
-    }
-}
+    // Clean up
+    array_map('unlink', glob("$this->outputDir/*.*"));
+    rmdir($this->outputDir);
+});
