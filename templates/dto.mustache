@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DTO;
+namespace Pixuin\OpenapiDTO\DTO;
 
 use Symfony\Component\HttpFoundation\Request;
 

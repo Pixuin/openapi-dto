@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Parser;
+namespace Pixuin\OpenapiDTO\Parser;
 
 class OpenAPIParser
 {

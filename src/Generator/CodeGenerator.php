@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Generator;
+namespace Pixuin\OpenapiDTO\Generator;
 
-use App\Parser\OpenAPIParser;
+use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
 use Mustache_Engine;
 
 class CodeGenerator
