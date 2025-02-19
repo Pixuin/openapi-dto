@@ -18,7 +18,7 @@ class {{className}}
     }
 
     {{#properties}}
-    public function get{{name|ucfirst}}(): {{type}}
+    public function get{{name|capitalize}}(): {{type}}
     {
         return $this->{{name}};
     }
