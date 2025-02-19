@@ -18,7 +18,8 @@
         "pestphp/pest-plugin": "^1.0"
     },
     "scripts": {
-        "test": "pest"
+        "test": "pest",
+        "pest": "vendor/bin/pest"
     },
     "config": {
         "allow-plugins": {
