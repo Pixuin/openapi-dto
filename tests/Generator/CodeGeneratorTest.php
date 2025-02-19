@@ -15,9 +15,9 @@ it('generates classes from OpenAPI schema', function () {
     $classes = $this->generator->generate($templatePath);
 
     expect($classes)->toBeArray();
-    expect($classes)->toHaveKey('UserDTODTO');
-    expect($classes['UserDTODTO'])->toContain('class UserDTODTO');
-    expect($classes['UserDTODTO'])->toContain('private int $id');
-    expect($classes['UserDTODTO'])->toContain('private string $name');
-    expect($classes['UserDTODTO'])->toContain('private string $email');
+    expect($classes)->toHaveKey('UserDTO'); // Changed from 'UserDTODTO' to 'UserDTO'
+    expect($classes['UserDTO'])->toContain('class UserDTO'); // Changed from 'UserDTODTO' to 'UserDTO'
+    expect($classes['UserDTO'])->toContain('private int $id'); // Changed from 'UserDTODTO' to 'UserDTO'
+    expect($classes['UserDTO'])->toContain('private string $name'); // Changed from 'UserDTODTO' to 'UserDTO'
+    expect($classes['UserDTO'])->toContain('private string $email'); // Changed from 'UserDTODTO' to 'UserDTO'
 });

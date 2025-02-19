@@ -5,7 +5,7 @@ namespace Pixuin\OpenapiDTO\Writer;
 beforeEach(function () {
     $this->outputDir = __DIR__ . '/../../output_test'; // Ensure this directory is writable
     $this->classes = [
-        'UserDTODTO' => '<?php declare(strict_types=1); namespace DTO; class UserDTODTO { private int $id; private string $name; private string $email; }',
+        'UserDTO' => '<?php declare(strict_types=1); namespace DTO; class UserDTO { private int $id; private string $name; private string $email; }',
     ];
     $this->writer = new CodeWriter();
 });
@@ -14,7 +14,7 @@ it('creates directory and files when writing classes', function () {
     $this->writer->write($this->classes, $this->outputDir);
 
     expect(is_dir($this->outputDir))->toBeTrue();
-    expect(file_exists($this->outputDir . '/UserDTODTO.php'))->toBeTrue();
+    expect(file_exists($this->outputDir . '/UserDTO.php'))->toBeTrue(); // Changed from 'UserDTODTO.php' to 'UserDTO.php'
 
     // Clean up
     array_map('unlink', glob("$this->outputDir/*.*"));
