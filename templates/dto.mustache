@@ -5,17 +5,11 @@ namespace DTO;
 use JsonSerializable;
 use Symfony\Component\HttpFoundation\Request;
 
-class {{className}} implements JsonSerializable
+readonly class {{className}} implements JsonSerializable
 {
-    {{#properties}}
-    private readonly {{type}} ${{name}};
-    {{/properties}}
 
-    public function __construct({{#properties}}{{type}} ${{name}}{{^last}}, {{/last}}{{/properties}})
+    public function __construct({{#properties}}private {{type}} ${{name}}{{^last}}, {{/last}}{{/properties}})
     {
-        {{#properties}}
-        $this->{{name}} = ${{name}};
-        {{/properties}}
     }
 
     {{#properties}}
@@ -31,5 +25,14 @@ class {{className}} implements JsonSerializable
             /** @phpstan-ignore-next-line */
             {{#properties}}$request->get('{{name}}'), {{/properties}}
         );
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            {{#properties}}
+            '{{name}}' => $this->get{{getterName}}(),
+            {{/properties}}
+        ];
     }
 }
