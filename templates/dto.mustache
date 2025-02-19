@@ -4,7 +4,13 @@ namespace Pixuin\OpenapiDTO\DTO;
 
 use Symfony\Component\HttpFoundation\Request;
 
-class {{className}}
+class {{className}} implements \JsonSerializable
+````
+
+templates/dto.mustache
+````mustache
+<<<<<<< SEARCH
+    }
 {
     {{#properties}}
     private readonly {{type}} ${{name}};
