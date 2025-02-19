@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserDTO implements \JsonSerializable
 {
+{
 ````
 
 templates/dto.mustache
