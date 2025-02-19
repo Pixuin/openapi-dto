@@ -116,7 +116,7 @@ If you have ideas for improvements or find bugs, please create an issue or pull 
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](https://mit-license.org/).
 
 ## Author
 
