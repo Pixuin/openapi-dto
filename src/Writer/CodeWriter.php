@@ -15,7 +15,9 @@ class CodeWriter
 
         foreach ($classes as $className => $classCode) {
             $filePath = $outputDir . DIRECTORY_SEPARATOR . $className . '.php';
-            file_put_contents($filePath, $classCode);
+            if (file_put_contents($filePath, $classCode) === false) {
+                throw new \RuntimeException(sprintf('Failed to write file "%s"', $filePath));
+            }
         }
     }
 }

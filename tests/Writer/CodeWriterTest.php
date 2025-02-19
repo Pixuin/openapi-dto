@@ -22,7 +22,7 @@ it('creates directory and files when writing classes', function () {
 });
 
 it('throws an exception if the directory cannot be created', function () {
-    $invalidOutputDir = __DIR__ . '/../../invalid_directory_path'; // Use a relative path that is invalid
+    $invalidOutputDir = '/invalid_directory_path'; // Use an absolute path that is invalid
     $this->expectException(\RuntimeException::class);
     $this->writer->write($this->classes, $invalidOutputDir);
 });
