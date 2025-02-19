@@ -1,0 +1,6 @@
+parameters:
+    level: max
+    paths:
+        - src
+    autoload_files:
+        - vendor/autoload.php
