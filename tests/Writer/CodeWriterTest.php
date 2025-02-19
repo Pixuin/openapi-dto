@@ -14,7 +14,7 @@ it('creates directory and files when writing classes', function () {
     $this->writer->write($this->classes, $this->outputDir);
 
     expect(is_dir($this->outputDir))->toBeTrue();
-    expect(file_exists($this->outputDir . '/UserDTO.php'))->toBeTrue(); // Changed from 'UserDTODTO.php' to 'UserDTO.php'
+    expect(file_exists($this->outputDir . '/UserDTO.php'))->toBeTrue();
 
     // Clean up
     array_map('unlink', glob("$this->outputDir/*.*"));
@@ -22,7 +22,7 @@ it('creates directory and files when writing classes', function () {
 });
 
 it('throws an exception if the directory cannot be created', function () {
-    $invalidOutputDir = '/invalid/directory/path'; // This should be a valid path
+    $invalidOutputDir = __DIR__ . '/../../invalid_directory_path'; // Use a relative path that is invalid
     $this->expectException(\RuntimeException::class);
     $this->writer->write($this->classes, $invalidOutputDir);
 });
