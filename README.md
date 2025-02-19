@@ -1,6 +1,6 @@
 # OpenAPI DTO Generator
 
-![Build Status](https://img.shields.io/github/workflow/status/Pixuin/openapi-dto/CI)
+![Build Status](https://img.shields.io/github/actions/workflow/status/Pixuin/openapi-dto/ci.yml?branch=main)
 ![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
 ![PHP Version](https://img.shields.io/badge/php-8.3%2B-blue)
 ![PHPStan](https://img.shields.io/badge/PHPStan-level%20max-brightgreen)
