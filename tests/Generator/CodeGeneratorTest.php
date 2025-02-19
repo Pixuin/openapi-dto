@@ -6,7 +6,7 @@ use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
 
 beforeEach(function () {
     $this->parser = new OpenAPIParser();
-    $this->parser->parse(__DIR__ . '/../../test_openapi.json');
+    $this->parser->parse(__DIR__ . '/../test_openapi.json');
     $this->namespace = 'App\\DTO'; // Set the namespace
     $this->generator = new CodeGenerator($this->parser, $this->namespace); // Pass the namespace here
 });
