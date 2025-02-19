@@ -3,29 +3,21 @@
 namespace Pixuin\OpenapiDTO\Generator;
 
 use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
-use PHPUnit\Framework\TestCase;
 
-class CodeGeneratorTest extends TestCase
-{
-    private OpenAPIParser $parser;
-    private CodeGenerator $generator;
+beforeEach(function () {
+    $this->parser = new OpenAPIParser();
+    $this->parser->parse(__DIR__ . '/../../test_openapi.json');
+    $this->generator = new CodeGenerator($this->parser);
+});
 
-    protected function setUp(): void
-    {
-        $this->parser = new OpenAPIParser();
-        $this->parser->parse(__DIR__ . '/../../test_openapi.json');
-        $this->generator = new CodeGenerator($this->parser);
-    }
+it('generates classes from OpenAPI schema', function () {
+    $templatePath = __DIR__ . '/../../templates/dto.mustache';
+    $classes = $this->generator->generate($templatePath);
 
-    public function testGenerateClasses(): void
-    {
-        $templatePath = __DIR__ . '/../../templates/dto.mustache';
-        $classes = $this->generator->generate($templatePath);
-
-        $this->assertArrayHasKey('UserDTODTO', $classes);
-        $this->assertStringContainsString('class UserDTODTO', $classes['UserDTODTO']);
-        $this->assertStringContainsString('private int $id', $classes['UserDTODTO']);
-        $this->assertStringContainsString('private string $name', $classes['UserDTODTO']);
-        $this->assertStringContainsString('private string $email', $classes['UserDTODTO']);
-    }
-}
+    expect($classes)->toBeArray();
+    expect($classes)->toHaveKey('UserDTODTO');
+    expect($classes['UserDTODTO'])->toContain('class UserDTODTO');
+    expect($classes['UserDTODTO'])->toContain('private int $id');
+    expect($classes['UserDTODTO'])->toContain('private string $name');
+    expect($classes['UserDTODTO'])->toContain('private string $email');
+});
