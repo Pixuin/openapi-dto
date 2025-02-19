@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Pixuin\OpenapiDTO\Parser;
+namespace Parser;
 
 use RuntimeException;
 

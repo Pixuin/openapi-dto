@@ -3,9 +3,9 @@
 
 require 'vendor/autoload.php';
 
-use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
-use Pixuin\OpenapiDTO\Generator\CodeGenerator;
-use Pixuin\OpenapiDTO\Writer\CodeWriter;
+use Parser\OpenAPIParser;
+use Generator\CodeGenerator;
+use Writer\CodeWriter;
 
 // Function to parse command-line arguments
 function parseArguments($argv): array

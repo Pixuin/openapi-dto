@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Pixuin\OpenapiDTO\Writer;
+namespace Writer;
 
 class CodeWriter
 {

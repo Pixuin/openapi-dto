@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Pixuin\OpenapiDTO\Generator;
+namespace Generator;
 
 use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
 use Mustache_Engine;
