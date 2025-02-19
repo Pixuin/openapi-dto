@@ -18,7 +18,7 @@ class {{className}}
     }
 
     {{#properties}}
-    public function get{{name}}(): {{type}}
+    public function get{{getterName}}(): {{type}}
     {
         return $this->{{name}};
     }

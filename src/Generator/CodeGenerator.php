@@ -41,8 +41,9 @@ class CodeGenerator
         foreach ($schema['properties'] as $name => $details) {
             $type = $details['type'] === 'integer' ? 'int' : $details['type'];
             $properties[] = [
-                'name' => ucfirst($name),
-                'type' => $type
+                'name' => $name,
+                'type' => $type,
+                'getterName' => ucfirst($name)
             ];
         }
         return $properties;
