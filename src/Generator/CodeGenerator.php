@@ -10,11 +10,13 @@ class CodeGenerator
 {
     private OpenAPIParser $parser;
     private Mustache_Engine $mustache;
+    private string $namespace;
 
-    public function __construct(OpenAPIParser $parser)
+    public function __construct(OpenAPIParser $parser, string $namespace)
     {
         $this->parser = $parser;
         $this->mustache = new Mustache_Engine();
+        $this->namespace = $namespace; // Store the namespace
     }
 
     /**
@@ -31,6 +33,7 @@ class CodeGenerator
             $template = file_get_contents($templatePath) ?: '';
             $classCode = $this->mustache->render($template, [
                 'className' => $className,
+                'namespace' => $this->namespace, // Use the stored namespace
                 'properties' => $properties
             ]);
             $generatedClasses[$className] = $classCode;

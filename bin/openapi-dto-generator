@@ -38,7 +38,7 @@ $parser = new OpenAPIParser();
 $parser->parse($inputFile);
 
 // Generate DTO classes
-$generator = new CodeGenerator($parser);
+$generator = new CodeGenerator($parser, $namespace); // Pass the namespace here
 $classes = $generator->generate('templates/dto.mustache');
 
 // Write the generated classes to the output directory
