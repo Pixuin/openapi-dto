@@ -1,9 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Generator;
+namespace Pixuin\OpenapiDTO\Generator;
 
-use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
+use InvalidArgumentException;
 use Mustache_Engine;
+use Pixuin\OpenapiDTO\Parser\OpenAPIParser;
 
 class CodeGenerator
 {
@@ -46,7 +47,7 @@ class CodeGenerator
     {
         $properties = [];
         if (!is_array($schema['properties'])) {
-            throw new \InvalidArgumentException('Schema properties must be an array.');
+            throw new InvalidArgumentException('Schema properties must be an array.');
         }
         foreach ($schema['properties'] as $name => $details) {
             $type = $details['type'] === 'integer' ? 'int' : $details['type'];
