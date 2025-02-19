@@ -27,7 +27,7 @@ class CodeGenerator
         foreach ($schemas as $name => $schema) {
             $className = ucfirst($name) . 'DTO';
             $properties = $this->extractProperties($schema);
-            $template = file_get_contents($templatePath);
+            $template = file_get_contents($templatePath) ?: '';
             $classCode = $this->mustache->render($template, [
                 'className' => $className,
                 'properties' => $properties
@@ -45,8 +45,14 @@ class CodeGenerator
     private function extractProperties(array $schema): array
     {
         $properties = [];
+        if (!is_array($schema['properties'])) {
+            throw new \InvalidArgumentException('Schema properties must be an array.');
+        }
         foreach ($schema['properties'] as $name => $details) {
             $type = $details['type'] === 'integer' ? 'int' : $details['type'];
+            if (!is_string($name) || !is_array($details) || !isset($details['type'])) {
+                continue;
+            }
             $properties[] = [
                 'name' => $name,
                 'type' => $type,
