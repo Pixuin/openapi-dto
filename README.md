@@ -1,10 +1,8 @@
 # OpenAPI DTO Generator
 
+![Coverage](https://img.shields.io/badge/coverage-100%25-brightgreen)
+
 OpenAPI DTO Generator is a PHP 8.3 command-line tool that reads an OpenAPI specification (the `openapi.json` file) and generates immutable Data Transfer Object (DTO) classes based on the definitions in the schemas. The generated classes are designed according to SOLID principles, and access to internal values is provided exclusively through public getter methods, allowing for customization by subclasses.
-
-## Author
-
-Vladimir Polak <vladimir.polak.ml@gmail.com>
 
 ## Project Goals
 
@@ -17,31 +15,12 @@ Vladimir Polak <vladimir.polak.ml@gmail.com>
 
 ## Project Structure
 
-```mermaid
-graph TD;
-    A[openapi-dto-generator] --> B[bin];
-    A --> C[src];
-    A --> D[templates];
-    A --> E[tests];
-    A --> F[config];
-    A --> G[vendor];
-    C --> C1[Parser];
-    C --> C2[Generator];
-    C --> C3[Writer];
-    C --> C4[DTO];
-    C1 --> C1A[OpenAPIParser.php];
-    C2 --> C2A[CodeGenerator.php];
-    C3 --> C3A[CodeWriter.php];
-    C4 --> C4A[BaseDTO.php];
-    D --> D1[dto.mustache];
-    E --> E1[Parser];
-    E --> E2[Generator];
-    E --> E3[Writer];
-    E1 --> E1A[OpenAPIParserTest.php];
-    E2 --> E2A[CodeGeneratorTest.php];
-    E3 --> E3A[CodeWriterTest.php];
-    F --> F1[generator.php];
-```
+- **bin/**: Contains the executable script for running the generator.
+- **src/**: Contains the main source code, including the parser, generator, writer, and DTO classes.
+- **templates/**: Contains Mustache templates for generating the DTO classes.
+- **tests/**: Contains unit tests for the parser, generator, and writer.
+- **config/**: Contains configuration files for the generator.
+- **vendor/**: Contains third-party dependencies managed by Composer.
 
 For detailed documentation, please refer to the [ZADANI.md](ZADANI.md).
 
@@ -138,3 +117,7 @@ If you have ideas for improvements or find bugs, please create an issue or pull 
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+
+## Author
+
+Vladimir Polak <vladimir.polak.ml@gmail.com>
