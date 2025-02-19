@@ -6,12 +6,7 @@ use JsonSerializable;
 use Symfony\Component\HttpFoundation\Request;
 
 class {{className}} implements JsonSerializable
-````
-
-templates/dto.mustache
-````mustache
-<<<<<<< SEARCH
-    }
+{
     {{#properties}}
     private readonly {{type}} ${{name}};
     {{/properties}}
