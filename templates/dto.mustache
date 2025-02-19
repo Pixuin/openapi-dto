@@ -10,7 +10,7 @@ class {{className}}
     private readonly {{type}} ${{name}};
     {{/properties}}
 
-    public function __construct({{#properties}}{{type}} ${{name}}, {{/properties}})
+    public function __construct({{#properties}}{{type}} ${{name}}{{^last}}, {{/last}}{{/properties}})
     {
         {{#properties}}
         $this->{{name}} = ${{name}};
