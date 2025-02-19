@@ -26,7 +26,7 @@ class CodeGenerator
         $generatedClasses = [];
 
         foreach ($schemas as $name => $schema) {
-            $className = ucfirst($name) . 'DTO';
+            $className = ucfirst($name) . 'DTO'; // Ensure the class name is correct
             $properties = $this->extractProperties($schema);
             $template = file_get_contents($templatePath) ?: '';
             $classCode = $this->mustache->render($template, [

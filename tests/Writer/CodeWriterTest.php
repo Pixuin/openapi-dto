@@ -3,7 +3,7 @@
 namespace Pixuin\OpenapiDTO\Writer;
 
 beforeEach(function () {
-    $this->outputDir = __DIR__ . '/../../output_test';
+    $this->outputDir = __DIR__ . '/../../output_test'; // Ensure this directory is writable
     $this->classes = [
         'UserDTODTO' => '<?php declare(strict_types=1); namespace DTO; class UserDTODTO { private int $id; private string $name; private string $email; }',
     ];
@@ -22,7 +22,7 @@ it('creates directory and files when writing classes', function () {
 });
 
 it('throws an exception if the directory cannot be created', function () {
-    $invalidOutputDir = '/invalid/directory/path';
+    $invalidOutputDir = '/invalid/directory/path'; // This should be a valid path
     $this->expectException(\RuntimeException::class);
     $this->writer->write($this->classes, $invalidOutputDir);
 });
