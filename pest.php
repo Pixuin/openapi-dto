@@ -1,2 +1,5 @@
 <?php declare(strict_types=1);
-// Placeholder for Pest configuration
+
+use Pest\Plugin;
+
+Plugin::add('tests/Parser', 'tests/Generator', 'tests/Writer', 'tests/DTO');
