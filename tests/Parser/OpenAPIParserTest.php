@@ -7,7 +7,7 @@ use RuntimeException;
 
 it('parses valid OpenAPI JSON and retrieves schemas', function () {
     $parser = new OpenAPIParser();
-    $parser->parse(__DIR__ . '/../../test_openapi.json');
+    $parser->parse(__DIR__ . '/../test_openapi.json');
 
     $schemas = $parser->getSchemas();
 
@@ -22,5 +22,5 @@ it('parses valid OpenAPI JSON and retrieves schemas', function () {
 it('throws an exception for invalid JSON', function () {
     $parser = new OpenAPIParser();
     $this->expectException(RuntimeException::class);
-    $parser->parse(__DIR__ . '/../../invalid_openapi.json');
+    $parser->parse(__DIR__ . '/../invalid_openapi.json');
 });
