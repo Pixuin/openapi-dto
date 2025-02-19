@@ -2,6 +2,8 @@
 
 namespace Pixuin\OpenapiDTO\Parser;
 
+use RuntimeException;
+
 class OpenAPIParser
 {
     /** @var array<string, array<string, mixed>> */
@@ -10,13 +12,12 @@ class OpenAPIParser
     public function parse(string $filePath): void
     {
         $jsonContent = file_get_contents($filePath) ?: '';
-        $openapiData = json_decode($jsonContent, true);
+        $openapiData = json_decode($jsonContent, true, 512, JSON_THROW_ON_ERROR);
         if (!is_array($openapiData)) {
-            throw new \RuntimeException('Invalid JSON format.');
+            throw new RuntimeException('Invalid JSON format.');
         }
 
-        if (isset($openapiData['components']) && is_array($openapiData['components']) &&
-            isset($openapiData['components']['schemas']) && is_array($openapiData['components']['schemas'])) {
+        if (isset($openapiData['components']['schemas']) && is_array($openapiData['components']) && is_array($openapiData['components']['schemas'])) {
             $this->schemas = $openapiData['components']['schemas'];
         }
     }
