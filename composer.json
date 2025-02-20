@@ -6,8 +6,7 @@
     "require": {
         "php": "^8.3",
         "symfony/http-foundation": "~2.8|^3.0",
-        "mustache/mustache": "^2.14",
-        "pestphp/pest": "^1.22"
+        "mustache/mustache": "^2.14"
     },
     "autoload": {
         "psr-4": {
@@ -16,7 +15,8 @@
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",
-        "pestphp/pest-plugin": "^1.0"
+        "pestphp/pest-plugin": "^1.0",
+        "pestphp/pest": "^1.23"
     },
     "scripts": {
         "test": "pest",
